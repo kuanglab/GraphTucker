@@ -22,18 +22,12 @@ Note that the necessary memory/RAM for running GraphTucker on the MOSTA_9.5 data
 
 We use the most up to date MATLAB version R2023b for all implementations. 
 
-The following system requirements are listed based on running GraphTucker on the example dataset with default parameters rank=(64,64,64) and \lambda=0.1. 
-
-System requirements:
-*Test this on compbio-ws09 and add info here*
-
 MATLAB add-on requirements:
-The only add-on needed is the Tensor Toolbox for MATLAB, Version 3.6<sup>2</sup> (https://www.tensortoolbox.org/), which is included in the repository.
-
+The only add-on needed is the Tensor Toolbox for MATLAB, Version 3.6<sup>2</sup> (https://www.tensortoolbox.org/), which is included in the repository in the `GT_utils` folder.
 
 ## Step 0: Obtaining preprocessed data
 
-We provide an example MOSTA Stereo-seq mouse embryo (day 9.5) dataset that has been preprocessed into tensor format. We also provide the corresponding gene name and mouse PPI for [BioGRID](https://thebiogrid.org/) that can be used for imputation/graph regularization . The link to download this data can be found [here](!add download link here!):
+We provide an example MOSTA Stereo-seq mouse embryo (day 9.5) dataset that has been preprocessed into tensor format. We also provide the corresponding gene name and mouse PPI for [BioGRID](https://thebiogrid.org/) that can be used for imputation/graph regularization. This data is provided in the repository in `data.zip`. Simply unzip it into its own folder to use in this code.
 
 We will also be providing detailed preprocessing steps on how to convert raw Stereo-seq data into a spatial gene expression tensor (coming soon).
 
@@ -58,7 +52,18 @@ GraphTucker parameters are defaulted to rank=(64,64,64), lambda=0.1, with 5000 m
 
 ## Step 2: Visualizing spatial components output by GraphTucker
 
-To visualize the spatial components output by GraphTucker, run `visualize_GraphTucker_spatial_components.m` script. Again, ensure the path variables are correct. This script will automatically save visualizations (as .pngs) of each spatial component into a distinct folder depending on the rank and lambda used. We include the spatial component images for MOSTA_9.5 obtained from running GraphTucker with the default parameters.
+To visualize the spatial components output by GraphTucker, run `visualize_GraphTucker_spatial_components.m` script. Again, ensure the path variables are correct. This script will automatically save visualizations (as .pngs) of each spatial component into a distinct folder depending on the rank and lambda used. We include the spatial component images for MOSTA_9.5 obtained from running GraphTucker with the default parameters. Here are three example spatial components that show how they are visualized:
+
+**Spatial component 1**
+![Spatial component 1](./vis/MOSTA_9.5/rank=64-64-64/lambda=0.1/g_comp=1.png)
+
+
+**Spatial component 15**
+![Spatial component 15](./vis/MOSTA_9.5/rank=64-64-64/lambda=0.1/g_comp=15.png)
+
+
+**Spatial component 60**
+![Spatial component 1](./vis/MOSTA_9.5/rank=64-64-64/lambda=0.1/g_comp=60.png)
 
 ## References
 
