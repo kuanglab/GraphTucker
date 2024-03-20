@@ -25,7 +25,6 @@ vals(vals==2) = 1; % set to zeros if UMI counts < 3.
 V = sptensor(V.subs,log(vals),V.size); % log normalization
 
 
-
 % eliminate boundaries
 Z = double(tenmat(V,1));
 ind1 = find(sum(Z,2) ~= 0);
