@@ -53,7 +53,7 @@ We also provide an example MOSTA Stereo-seq mouse embryo (day 9.5) dataset and V
 
 We will also be providing detailed preprocessing steps on how to convert raw Stereo-seq data into a spatial gene expression tensor (coming soon).
 
-Here is a description of each data file and their general formatting (same for BRCA1): 
+Here is a description of each data file and their general formatting (same structure for BRCA1): 
 
 1. MOSTA_9.5_tensor.mat
    - spatial gene expression tensor, stored as a `int64`. Loaded in and used as a `tensor` object.
