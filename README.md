@@ -37,7 +37,9 @@ GraphTucker/
 >> <DATASET_NAME>/
 >>> filtered_feature_bc_matrix/
 >>>> barcodes.tsv.gz
+
 >>>> features.tsv.gz
+
 >>>> matrix.mtx.gz
 
 >>> spatial/
