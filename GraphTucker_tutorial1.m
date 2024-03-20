@@ -1,17 +1,18 @@
 clear all;clc
 
 opts.stopcrit = 10^-4; % stopping criteria for GraphTucker convergence
-opts.maxiters = 1000; % maxiters=5000 used for all experiments
+opts.maxiters = 1000; % max iterations - we recommend using 1000
 opts.mode = 1; % set to 0 to run GraphTucker with sparse data tensors, or 1 for non-sparse
 % we observe faster runtimes when using non-sparse tensors, so we set this
 % to 1
 
 tissue_name = 'MOSTA_9.5';
-work_path = 'GraphTucker/'; % path to where GraphTucker folder is located
-data_path = ['GraphTucker/data/', tissue_name, '/']; % path to where spatial gene expression data is located
-utils_path =[work_path, 'GT_utils/'];
-res_path = [work_path, 'res/', tissue_name, '/'];
-addpath(work_path) % add path to ensure scripts can be found correctly
+% work_path = 'GraphTucker/'; % path to where GraphTucker folder is located
+processing_path = 'processing/'; % path to processing scripts folder
+data_path = ['processed_data/', tissue_name, '/']; % path to where spatial gene expression data is located
+utils_path ='GT_utils/';
+res_path = ['res/', tissue_name, '/'];
+addpath(processing_path) % add path to ensure scripts can be found correctly
 addpath(utils_path) % add path so util files can be found
 
 % initialize GraphTucker parameters
@@ -24,12 +25,12 @@ rank_str = [num2str(opts.rank_set(1)), '-', num2str(opts.rank_set(2)), '-', num2
 data_name = tissue_name;
 
 % prepare data tensor and graphs
-[T, W] = data_prep_mosta(data_name, data_path, utils_path);
+[T, W] = data_prep_mosta(data_name, data_path);
 
 disp(['Spatial gene expression tensor size:', num2str(size(T))])
 disp(['Density: ', num2str(length(T.vals) / prod(size(T)))]);
 
-% list of non-background spots. Needed for spatial component visualization
+% list of non-background spotsNeeded for spatial component visualization
 T_subs = T.subs;
 save([data_path, data_name, '_val_subs.mat'], 'T_subs'); 
 

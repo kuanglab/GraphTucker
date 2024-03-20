@@ -1,22 +1,22 @@
 clear all;clc
 
 opts.stopcrit = 10^-4; % stopping criteria for GraphTucker convergence
-opts.maxiters = 1; % maxiters=5000 used for all experiments
+opts.maxiters = 0; % max iterations - we recommend using 1000
 opts.mode = 1; % set to 0 to run GraphTucker with sparse data tensors, or 1 for non-sparse
 % we observe faster runtimes when using non-sparse tensors, so we set this
 % to 1
 
 tissue_name = 'BRCA1';
-work_path = 'GraphTucker/'; % path to where GraphTucker folder is located
+processing_path = 'processing/';
 data_path = ['processed_data/', tissue_name, '/']; % path to where spatial gene expression data is located
-utils_path =[work_path, 'GT_utils/'];
+utils_path ='GT_utils/';
 res_path = ['res/', tissue_name, '/'];
-addpath(work_path) % add path to ensure scripts can be found correctly
+addpath(processing_path) % add path to ensure scripts can be found correctly
 addpath(utils_path) % add path so util files can be found
 
 % initialize GraphTucker parameters
 lambda = 1; % graph regularization parameter
-tucker_rank = [30 30 7]; %core tensor/factor matrix ranks: r_x, r_y, r_g
+tucker_rank = [30 30 20]; %core tensor/factor matrix ranks: r_x, r_y, r_g
 opts.rank_g = tucker_rank(3);
 opts.rank_set = tucker_rank(1:2);
 rank_str = [num2str(opts.rank_set(1)), '-', num2str(opts.rank_set(2)), '-', num2str(opts.rank_g)];
@@ -24,12 +24,13 @@ rank_str = [num2str(opts.rank_set(1)), '-', num2str(opts.rank_set(2)), '-', num2
 data_name = tissue_name;
 
 % prepare data tensor and graphs
-[T, W] = data_prep_visium(data_name, data_path, utils_path);
+% [T, W] = data_prep_visium(data_name, data_path);
+[T, W] = data_prep_alt(data_name, data_path);
 
 disp(['Spatial gene expression tensor size:', num2str(size(T))])
 disp(['Density: ', num2str(length(T.vals) / prod(size(T)))]);
 
-% list of non-background spots. Needed for spatial component visualization
+% list of non-background spots. Used for spatial component visualization
 T_subs = T.subs;
 save([data_path, data_name, '_val_subs.mat'], 'T_subs'); 
 
