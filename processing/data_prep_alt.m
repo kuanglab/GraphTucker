@@ -6,7 +6,9 @@ function [V,W] = data_prep_visium(data_name, data_path)
 % load data tensor
 load([data_path, data_name,'_tensor.mat']); 
 
-% load PPI network. This script loads the Human PPI (HSA) by default
+% load PPI network. This script loads the you
+% processed in the process_ppi.py script
+% here we load the Human PPI (HSA) by default
 load([data_path,'HSA_PPI.mat']);
 
 % load gene ids
@@ -39,9 +41,9 @@ Z = double(tenmat(V,3));
 Z(Z>0)=1;
 total_counts = sum(Z,2);
 ind3 = find(total_counts>3); % remove genes that are expressed in less than 4 spots
-% V  = V(:,:,ind3);
+% V  = V(:,:,ind3); % optional
 n = [size(V,1),size(V,2),size(V,3)];
-% genes = genes(ind3);
+% genes = genes(ind3); % remove from gene list as well
 
 W = cell(3,1);
 % build spatial graphs
@@ -53,7 +55,13 @@ end
 % This script loads and uses the HSA PPI by default
 W{3} = zeros(n(3),n(3));
 
-[ia,ib] = ismember(genes,HSA_UNIQ_BIOGRID_GENE);
+% the variables HSA_UNIQ_BIOGRID_GENE and HSA_BIOGRID need to be updated
+% if you saved these respective variables under different names in the
+% process_ppi.py script
+
+PPI_GENE_NAMES =  cellstr(HSA_UNIQ_BIOGRID_GENE);
+[ia,ib] = ismember(lower(genes),PPI_GENE_NAMES);
 W{3}(ia,ia) = HSA_BIOGRID(ib(ib>0),ib(ib>0));
 
+V = V(:,:, find(ia)); % only use genes that are in the PPI. OPTIONAL
 end
