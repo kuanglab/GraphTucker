@@ -39,6 +39,7 @@ GraphTucker/
 >>>> barcodes.tsv.gz
 >>>> features.tsv.gz
 >>>> matrix.mtx.gz
+
 >>> spatial/
 >>>> tissue_positions_list.csv
 
