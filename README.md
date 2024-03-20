@@ -64,10 +64,13 @@ Here is a description of each data file and their general formatting:
    - size (n_x, n_y, n_g) after pre-processing: (80, 107, 9687) 
 3. MOSTA_9.5_gene_names.csv
    - list of gene names corresponding to 11153 genes in the spatial gene expression tensor. This file contains the Ensembl ID and gene symbol for each gene.
-5. MUS_PPI.mat
+3. MUS_PPI.mat
    - Version 4.4.226 Mus musculus PPI network from BioGRID that was used for testing.
    - Contains variables `MUS_GENE` which gives gene symbols and `MUS_BIOGRID` which is the adjacency matrix for the network (size: 11153 x 11153).
    - Can be replaced with any version of the network, provided the .mat file formatting is the same.
+4. MOSTA_9.5_val_subs.mat
+   - Contains valid spot indices to indcate non-background spots
+   - This file is strictly used for visualization purposes, and will be saved when running GraphTucker_tutorial1.m
   
 # Tutorial 1: Spatial component visualization for a Stereo-seq mouse embryo dataset
 
