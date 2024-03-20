@@ -33,7 +33,7 @@ Clicking on the dataset will take you to an overview of the data. Scroll down to
 
 -- GraphTucker
    -- data
-      -- BRCA1 
+      -- <DATASET_NAME>
          -- filtered_feature_bc_matrix
             - barcodes.tsv.gz
             - features.tsv.gz
@@ -41,15 +41,15 @@ Clicking on the dataset will take you to an overview of the data. Scroll down to
          -- spatial
             - tissue_positions_list.csv
 
-Once you've made sure your file structure is correct, we are going to run the R script Visium2Tensor.R to convert our raw data into MATLAB tensor format. First, create a new folder where you want the processed data to be output e.g. GraphTucker/processed_data. You can then run the script by opening the terminal/command prompt inside the GraphTucker folder and running the following command:
+Once you've made sure your file structure is correct, we are going to run the R script Visium2Tensor.R in the 'processing' folder to convert the raw data into MATLAB tensor format. You can then run the script by opening the terminal/command prompt inside the GraphTucker folder and running the following command:
 
 Rscript Visium2Tensor.R --input data --output processed_data
             
 This will output two processed data files into the processed_data folder, BRCA1.mat and BRCA1_gene.csv. If you have multiple datasets in the data folder, this script will process them all and output each file into the processed_data folder.
 
-Next, we will run the Convert2Sptensor.m script to convert our new .mat data file into a sparse tensor and save a significant amount of space. Open the Convert2Sptensor script in MATLAB, and change the "path_data_path" and "data_name" variables accordingly so the filepath correctly points to the .mat data file. After running this, you can delete the original file if you want to save space. The data is now ready to be used for running GraphTucker.
+Next, we will run the Convert2Sptensor.m script in the 'processing' folder to convert our new .mat data file into a sparse tensor and save a significant amount of space. Open the Convert2Sptensor script  in MATLAB, and change the "path_data_path" and "data_name" variables accordingly so the filepath correctly points to the .mat data file. After running this, you can delete the original file if you want to save space. The data is now ready to be used for running GraphTucker.
 
-We also provide an example MOSTA Stereo-seq mouse embryo (day 9.5) dataset that has been preprocessed into tensor format. We also provide the corresponding gene name and mouse PPI for [BioGRID](https://thebiogrid.org/) that can be used for imputation/graph regularization. This data is provided in the repository in `data.zip`. Simply unzip it into its own folder to use in this code.
+We also provide an example MOSTA Stereo-seq mouse embryo (day 9.5) dataset that has been preprocessed into tensor format. We also provide the corresponding gene name and mouse PPI for [BioGRID](https://thebiogrid.org/) that can be used for imputation/graph regularization. This data is provided in the repository in `/processed_data/MOSTA_9.5.zip`. Simply unzip it into its own folder to use in this code.
 
 We will also be providing detailed preprocessing steps on how to convert raw Stereo-seq data into a spatial gene expression tensor (coming soon).
 
@@ -70,13 +70,13 @@ Here is a description of each data file and their general formatting:
 
 ## Step 1: Running GraphTucker to obtain imputed spatial gene expression tensor and Tucker components
 
-GraphTucker can be run on the mouse embryo dataset by running the `GraphTucker_tutorial1.m` script. The only necessary changes needed to run the script are to change the `work_path` and `data_path` variables to the paths the GraphTucker and MOSTA_9.5 folders were downloaded to, respectfully. A mouse PPI network is included with the data as well.
+GraphTucker can be run on the mouse embryo dataset by running the `GraphTucker_tutorial1.m` script. No changes in the file should be necessary to run this script, though make sure you have unzipped the MOSTA_9.5.zip file in the 'processed_data' folder. A mouse PPI network in the necessary MATLAB format is included with this data as well.
 
-GraphTucker parameters are defaulted to rank=(64,64,64), lambda=0.1, with 1000 max iterations. Runtime for the MOSTA_9.5 dataset on our machine takes ~6-7 hours. The max iterations can be lowered to significantly reduce runtime, though the  approximation error may suffer as a result.
+GraphTucker parameters are defaulted to rank=(64,64,64), lambda=0.1, with 1000 max iterations. Runtime for the MOSTA_9.5 dataset on our machine takes ~1-2 hours. The max iterations can be lowered to significantly reduce runtime, though the approximation error may suffer as a result.
 
 ## Step 2: Visualizing spatial components output by GraphTucker
 
-To visualize the spatial components output by GraphTucker, run `visualize_GraphTucker_spatial_components.m` script. Again, ensure the path variables are correct. This script will automatically save visualizations (as .pngs) of each spatial component into a distinct folder depending on the rank and lambda used. We include the spatial component images for MOSTA_9.5 obtained from running GraphTucker with the default parameters. Here are three example spatial components that show how they are visualized:
+To visualize the spatial components output by GraphTucker, run `visualize_GraphTucker_spatial_components.m` script in the 'analysis' folder. Again, ensure the path variables are correct, but the default parameters should be okay. This script will automatically save visualizations (as .pngs) of each spatial component into a distinct folder depending on the rank and lambda used. We include the spatial component images for MOSTA_9.5 obtained from running GraphTucker with the default parameters. Here are three example spatial components that show how they are visualized:
 
 **Spatial component 1**
 ![Spatial component 1](./vis/MOSTA_9.5/rank=64-64-64/lambda=0.1/g_comp=1.png)
@@ -93,21 +93,45 @@ To visualize the spatial components output by GraphTucker, run `visualize_GraphT
 
 ## Step 1: Running GraphTucker to obtain imputed spatial gene expression tensor and Tucker components
 
-Similar to Tutorial 1, GraphTucker can be run on the mouse embryo dataset by running the `GraphTucker_tutorial2.m` script. The only necessary changes needed to run the script are to change the `work_path` and `data_path` variables to the paths the GraphTucker and BRCA1 processed data folders. You will also need a PPI network file - we provide a human PPI network 'HSA_ppi.mat' in the data/ppi_networks folder. Copy or move this file to where the processed BRCA1 data is located before running.
+Similar to Tutorial 1, GraphTucker can be run on the mouse embryo dataset by running the `GraphTucker_tutorial2.m` script. No changes are necessary for this script. We have provided the BRCA1 data that can be used for this tutorial script in 'processed_data/BRCA1.zip', so make sure to unzip this folder. A Human PPI is included with this zip file as well. Tissue region annotations are also provided in 'aux_data/tissue_annotations/BRCA1_annotations.mat'
 
-For analysis on this dataset, we recommend running GraphTucker with rank=(30, 30, 20), lambda=1, with 1000 max iterations (these are the default parameters). For other datasets, you may have to tune the rank. Tuning the x/y rank will affect the resolution (higher rank = higher resolution spatial components). Since we are trying to analyze how GraphTucker can capture 20 known regions, we set the the gene rank to 20. This should be adjusted based on the dataset being used, especially if prior knowledge is known about gene modules for the particular tissue. 
+For analysis on this dataset, we recommend running GraphTucker with rank=(30, 30, 20), lambda=1, with 1000 max iterations (these are the default parameters). For other datasets, you may have to tune the rank. Tuning the x/y rank will affect the resolution (higher rank = higher resolution spatial components). Since we are trying to analyze how GraphTucker can capture 20 known regions, we set the the gene rank here to 20.
 
-After verifying the PPI network file has been placed in the BRCA1 data folder and the proper parameters have been selected, you can run this script. This should take 1-2 hours depending on your computer/server.
+You can run now run this script, which should take 1-2 hours depending on your computer/server.
 
 ## Step 2: Analyzing results: finding spatial component matches and perform clustering
 
-After GraphTucker finishes running, the output decomposition will be saved to 'res/BRCA1'. We also provide an example output file that can be directly used for analysis, which we will use here.
+After GraphTucker finishes running, the output decomposition will be saved to 'res/BRCA1'. We also provide an example output file in 'res/BRCA1/GT_BRCA1_rank=30-30-20_lambda=1.mat_EXAMPLE.mat' that can be directly used for analysis, which we will use here.
 
-The script we'll be runnning first is 'spatial_component_analysis.m'. If you are using you're own dataset, make sure the path variables are set correctly so the results from Step 1 can be found and loaded in. Otherwise for this tutorial, no changes are needed and it can be run as is. This script requires a regional annotation specific to a dataset - we provide one that can be used for the BRCA1 dataset that's being used in this tutorial.
+The script we'll be runnning first is 'analyis/spatial_component_analysis.m'. If you are using you're own dataset, make sure the path variables are set correctly so the results from Step 1 can be found and loaded in. Otherwise for this tutorial, no changes are needed and it can be run as is. This script requires a regional annotation specific to a dataset - as previously mentioned, we provide one that can be used for the BRCA1 dataset that's being used in this tutorial.
 
-This script will load in the GraphTucker decomposition computed in Step 1, and find the best spatial component matches to the given region annotations. It also will check a variety of top n% core tensor entries to see whether only taking a select number of top interactions can help find spatial component matches. This is determined by selecting the n% with the lowest avg. ED of its matched spatial components. After the best core tensor sparsity has been computed, we output each matched spatial component with its corresponding AUC and ED to 'vis/DATASET_NAME/spatial_componentmatches' folder.
+This script will load in the GraphTucker decomposition computed in Step 1, and find the best spatial component matches to the given region annotations. It also will check a variety of top n% core tensor entries to see whether only taking a select number of top interactions can help find spatial component matches. This is determined by selecting the n% with the lowest avg. ED of its matched spatial components. After the best core tensor sparsity has been computed, we output each matched spatial component with its corresponding AUC and ED to 'vis/DATASET_NAME/spatial_component_matches' folder. Each image is saved with the region and the corresponding matched spatial component number in the filename.
 
-The second script we run for this analysis is 'spatial_component_clustering.m' for clustering analysis. This script is similar to the previous in terms of preprocessing the output data, but we do not check different n% of core tensor entries and instead default to using all entries since we observed best clustering ARI with this choice. After the decomposition is loaded and the spatial component tensor is constructed, we run k-means clustering on the spatial component tensor with k=num_regions (for this example this is k=20). We then calculate the ARI between this resulting clustering and the tissue annotations as ground truth labels. The original annotated regions are saved as an image with a specific color mapping, and some additional processing is done to find a best color matching between the original region colors and the k-means clustering output. This is to provide a better visualization for identifying which clusterings best correspond to original regions. The original regions and the color mapped clusterings are both saved to the 'vis/BRCA1/clustering/' folder.
+The second script we run for this analysis is 'analysis/spatial_component_clustering.m' for clustering analysis. This script is similar to the previous in terms of preprocessing the output data, but we do not check different n% of core tensor entries and instead default to using all entries, since we observed best clustering ARI with this choice. After the decomposition is loaded and the spatial component tensor is constructed, we run k-means clustering on the spatial component tensor with k=num_regions (for this example, k=20). We then calculate the ARI between this resulting clustering and the tissue annotations as ground truth labels. The original annotated regions are saved as an image with a specific color mapping, and some additional processing is done to find a best color matching between the original region colors and the k-means clustering output. This is to provide a better visualization for identifying which clusterings best correspond to original regions. The original regions and the color mapped clusterings are both saved to the 'vis/BRCA1/clustering/' folder.
+
+We've included the output images for the BRCA1 dataset in these folders already. Here are a few examples of the spatial component matches:
+
+**Region 1 spatial component match**
+
+![Region 1 spatial component match](./vis/BRCA1/spatial_component_matches/region=1_comp=2.png)
+
+**Region 10 spatial component match**
+
+![Region 10 spatial component match](./vis/BRCA1/spatial_component_matches/region=10_comp=6.png)
+
+**Region 11 spatial component match**
+
+![Region 11 spatial component match](./vis/BRCA1/spatial_component_matches/region=11_comp=16.png)
+
+And here are the clustering images:
+
+**Ground truth clustering**
+
+![Ground truth clustering](./vis/BRCA1/clustering/ground_truth_clustering.png)
+
+**Clustered spatial components**
+
+![Clustered spatial components](./vis/BRCA1/clustering/clustered_spatial_components.png)
 
 ## Final notes
 
