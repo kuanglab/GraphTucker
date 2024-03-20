@@ -32,15 +32,15 @@ In this part of the tutorial, we will walkthrough how to download and preprocess
 Clicking on the dataset will take you to an overview of the data. Scroll down to the bottom and download two files: "Feature / bracode matrix (filtered)" and "Spatial Imaging data". Move these downloaded files to a dedicated folder for the dataset somewhere in the GraphTucker folder e.g. GraphTucker/data/BRCA1/. Extract both files twice (.gz -> .tar -> folder), and you should have two folders "filtered_feature_bc_matrix" and "spatial". You can delete/remove the .tar and .gz files. Your file/folder structure should look like this and include the following:
 
 
--- GraphTucker
->   -- data
->>      -- <DATASET_NAME>
->>>         -- filtered_feature_bc_matrix
->>>>           - barcodes.tsv.gz
->>>>           - features.tsv.gz
->>>            - matrix.mtx.gz
->>>         -- spatial
->>>>            - tissue_positions_list.csv
+GraphTucker/
+> data/
+>> <DATASET_NAME>/
+>>> filtered_feature_bc_matrix/
+>>>> barcodes.tsv.gz
+>>>> features.tsv.gz
+>>>> matrix.mtx.gz
+>>> spatial/
+>>>> tissue_positions_list.csv
 
 
 Once you've made sure your file structure is correct, we are going to run the R script Visium2Tensor.R in the 'processing' folder to convert the raw data into MATLAB tensor format. You can then run the script by opening the terminal/command prompt inside the GraphTucker folder and running the following command:
