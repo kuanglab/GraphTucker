@@ -1,10 +1,10 @@
 # GraphTucker
 
-This work is currently under review.
+This work is currently under review[^1].
 
 # An example of running GraphTucker on a mouse embryo Stereo-seq dataset and visualizing the resulting components
 
-This repository provides code we used to run GraphTucker on a MOSTA Stereo-seq mouse embryo (day 9.5) dataset<sup>1</sup> to obtain an imputed spatial gene expression tensor in Tucker form, and visualize the resulting spatial components. Please review the system and add-on requirements below. 
+This repository provides code we used to run GraphTucker on a MOSTA Stereo-seq mouse embryo (day 9.5) dataset[^2] to obtain an imputed spatial gene expression tensor in Tucker form, and visualize the resulting spatial components. Please review the system and add-on requirements below. 
 
 ![Figure 1](./figure1.png)
 
@@ -29,7 +29,7 @@ Note that the necessary memory/RAM for running GraphTucker on the MOSTA_9.5 data
 We use the most up to date MATLAB version R2023b for all implementations. 
 
 MATLAB add-on requirements:
-The only add-on needed is the Tensor Toolbox for MATLAB, Version 3.6<sup>2</sup> (https://www.tensortoolbox.org/), which is included in the repository in the `GT_utils` folder.
+The only add-on needed is the Tensor Toolbox for MATLAB, Version 3.6[^3] (https://www.tensortoolbox.org/), which is included in the repository in the `GT_utils` folder.
   
 # Tutorial 1: Spatial component visualization for a Stereo-seq mouse embryo dataset
 
@@ -103,7 +103,7 @@ And here are the clustering images:
 All scripts have been commented throughout to provide some guidance at main steps. Regardless, if any questions or issues come up please feel free to leave comments or ask for help.
 
 ## References
-1. Deciphering High-order Structures in Spatial Transcriptomes with Graph-guided Tucker Decomposition, Charles Broadbent, Tianci Song and Rui Kuang, Under Review
-2. Chen, A., Liao, S., Cheng, M., Ma, K., Wu, L., Lai, Y., ... & Wang, J. (2022). Spatiotemporal transcriptomic atlas of mouse organogenesis using DNA nanoball-patterned arrays. Cell, 185(10), 1777-1792. DOI: 10.1016/j.cell.2022.04.003
-3. Brett W. Bader, Tamara G. Kolda and others, Tensor Toolbox for MATLAB, Version 3.6, www.tensortoolbox.org, September 28, 2023. 
-4. Stark, C., Breitkreutz, B. J., Reguly, T., Boucher, L., Breitkreutz, A., & Tyers, M. (2006). BioGRID: a general repository for interaction datasets. Nucleic acids research, 34(Database issue), D535–D539. https://doi.org/10.1093/nar/gkj109
+[^1]: Deciphering High-order Structures in Spatial Transcriptomes with Graph-guided Tucker Decomposition, Charles Broadbent, Tianci Song and Rui Kuang, Under Review
+[^2]: Chen, A., Liao, S., Cheng, M., Ma, K., Wu, L., Lai, Y., ... & Wang, J. (2022). Spatiotemporal transcriptomic atlas of mouse organogenesis using DNA nanoball-patterned arrays. Cell, 185(10), 1777-1792. DOI: 10.1016/j.cell.2022.04.003
+[^3]: Brett W. Bader, Tamara G. Kolda and others, Tensor Toolbox for MATLAB, Version 3.6, www.tensortoolbox.org, September 28, 2023. 
+[^4]: Stark, C., Breitkreutz, B. J., Reguly, T., Boucher, L., Breitkreutz, A., & Tyers, M. (2006). BioGRID: a general repository for interaction datasets. Nucleic acids research, 34(Database issue), D535–D539. https://doi.org/10.1093/nar/gkj109
