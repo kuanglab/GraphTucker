@@ -12,7 +12,7 @@ The code provided here demonstrates how to run GraphTucker on a spatial gene exp
 
 We provide two walkthrough tutorials here. Tutorial 1 demonstrates how to run GraphTucker on the Stereo-seq MOSTA 9.5 mouse embryo and visualize and save its spatial components. Tutorial 2 demonstrates how to run GraphTucker on the Visium BRCA1 dataset, and perform spatial component analysis to find region-spatial-component matches given a ground truth annotated tissue and GraphTucker decomposition output. We also show how to run clustering on the output GraphTucker spatial component tensor.
 
-If you want to run GraphTucker on your own data, please refer to the 'preprocessing_readme' where we walkthrough how to download and process a Visium dataset from the 10x Genomics website, as well as download and process a Human PPI network from BioGRID to be used as input for GraphTucker.
+If you want to run GraphTucker on your own data, please refer to the ['preprocessing_readme'](./preprocessing_readme.md) where we walkthrough how to download and process a Visium dataset from the 10x Genomics website, as well as download and process a Human PPI network from BioGRID to be used as input for GraphTucker.
 
 ## System and add-on requirements
 
