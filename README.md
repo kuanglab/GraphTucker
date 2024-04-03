@@ -1,6 +1,6 @@
 # GraphTucker
 
-This work is currently under review[^1].
+GraphTucker is a tool for discovering spatial components in spatial transcriptomics data using high-order analysis. GraphTucker is based on a graph-guilded Tucker Tensor Decomposition model optimized by a multiplicative updating algorithm for nonnegative decompoisition [^1].
 
 # An example of running GraphTucker on a mouse embryo Stereo-seq dataset and visualizing the resulting components
 
@@ -103,7 +103,7 @@ And here are the clustering images:
 All scripts have been commented throughout to provide some guidance at main steps. Regardless, if any questions or issues come up please feel free to leave comments or ask for help.
 
 ## References
-[^1]: Deciphering High-order Structures in Spatial Transcriptomes with Graph-guided Tucker Decomposition, Charles Broadbent, Tianci Song and Rui Kuang, Under Review
+[^1]: Deciphering High-order Structures in Spatial Transcriptomes with Graph-guided Tucker Decomposition, Charles Broadbent, Tianci Song and Rui Kuang, To Appear in the Proceedings of International Conference on Intelligent Systems for Molecular Biology (ISMB), July 12-16, 2024
 [^2]: Chen, A., Liao, S., Cheng, M., Ma, K., Wu, L., Lai, Y., ... & Wang, J. (2022). Spatiotemporal transcriptomic atlas of mouse organogenesis using DNA nanoball-patterned arrays. Cell, 185(10), 1777-1792. DOI: 10.1016/j.cell.2022.04.003
 [^3]: Brett W. Bader, Tamara G. Kolda and others, Tensor Toolbox for MATLAB, Version 3.6, www.tensortoolbox.org, September 28, 2023. 
 [^4]: Stark, C., Breitkreutz, B. J., Reguly, T., Boucher, L., Breitkreutz, A., & Tyers, M. (2006). BioGRID: a general repository for interaction datasets. Nucleic acids research, 34(Database issue), D535–D539. https://doi.org/10.1093/nar/gkj109
