@@ -1,6 +1,6 @@
 # GraphTucker
 
-GraphTucker is a tool for discovering spatial components in spatial transcriptomics data using high-order analysis. GraphTucker is based on a graph-guilded Tucker Tensor Decomposition model optimized by a multiplicative updating algorithm for nonnegative decompoisition [^1].
+GraphTucker is a tool for discovering spatial components in spatial transcriptomics data using high-order analysis. GraphTucker is based on a graph-guilded Tucker Tensor Decomposition model optimized by a multiplicative updating algorithm for nonnegative decompoisition [^1]. The preprint and the supplementary document are available [here](https://github.com/kuanglab/GraphTucker/tree/main/document).
 
 # An example of running GraphTucker on a mouse embryo Stereo-seq dataset and visualizing the resulting components
 
