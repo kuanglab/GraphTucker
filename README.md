@@ -100,7 +100,7 @@ And here are the clustering images:
 
 ## Clustering for baseline methods
 
-We have provided a folder [baseline_clustering](https://github.com/kuanglab/GraphTucker/baseline_clustering) containing scripts needed for generating clusterings for the four methods we used as baseline comparisons: NMF, RNMTF, FIST, NSFH. We also provide the resulting spatial components (post-processed to match tissue size and annotations) from each method to be directly used by the script that can be used to generate the clusterings presented in the manuscript. We will also provide code and/or commands necessary for running each of the baselines and any necessary post-processing scripts to align spot clusterings to the original tissues (coming soon).
+We have provided a folder [baseline_clustering](https://github.com/kuanglab/GraphTucker/tree/main/baseline_clustering) containing scripts needed for generating clusterings for the four methods we used as baseline comparisons: NMF, RNMTF, FIST, NSFH. We also provide the resulting spatial components (post-processed to match tissue size and annotations) from each method to be directly used by the script that can be used to generate the clusterings presented in the manuscript. We will also provide code and/or commands necessary for running each of the baselines and any necessary post-processing scripts to align spot clusterings to the original tissues (coming soon).
 
 ## Final notes
 
